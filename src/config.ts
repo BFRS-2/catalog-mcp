@@ -3,4 +3,6 @@ export const API_DOMAINS = {
   SERVICEABILITY:
     process.env.API_BASE_SERVICEABILITY ??
     "https://serviceability.shiprocket.in",
+  SR_CATALOG:
+    process.env.API_BASE_SR_CATALOG ?? "https://sr-catalog-go.shiprocket.in",
 };
