@@ -7,35 +7,36 @@ import { API_DOMAINS } from "@/config";
 export const initializeTools = (server: McpServer) => {
   server.tool(
     "catalogue_search",
-    `Get product catalogue search
+    `Get related products from catalogue based on product title
 
     Args:
-        title: String representing product name
+        title: String representing product title to search in the catalogue
 
     Returns: Dictionary containing the following info for each product:
-        id: Unique identifier of the product
-        product_id: Product's unique ID
-        name: Name of the product
-        category: Main category of the product
-        sub_category: Sub-category of the product
-        brand: Brand name
-        long_desc: Detailed description of the product
-        mrp: Maximum retail price
-        offer_price: Discounted price if available
-        available_quantity: Number of items in stock
-        store_url: URL of the store
-        product_link: Direct link to the product page
-        product_cover_image: Main image of the product
+        id: String representing unique identifier of the product
+        product_id: String representing ProductID
+        name: String representing name of the product
+        category: String representing main category of the product
+        sub_category: String representing Sub-category of the product
+        company_id: Integer representing company id of the product
+        brand: String representing brand name of the product
+        long_desc: String representing description of the product
+        mrp: Integer representing Maximum retail price
+        offer_price: Integer representing Discounted price if available
+        available_quantity: Integer representing Number of items in stock
+        store_url: String representing URL of the store
+        product_link: String representing Direct link to the product page
+        product_cover_image: String representing Main image of the product
         cdn_images: Array of product image URLs
-        l1_category: Level 1 category
-        l2_category: Level 2 category
-        l3_category: Level 3 category
+        l1_category: String representing Level 1 category
+        l2_category: String representing Level 2 category
+        l3_category: String representing Level 3 category
     `,
     {
       title: zod.string(),
     },
-    async ({ title: title }, context) => {
-      const catalogueUrl = `${API_DOMAINS.SR_CATALOG}/v2/catalog/product/search?title=${title}`;
+    async ({ title: productTitle }, context) => {
+      const catalogueUrl = `${API_DOMAINS.SR_CATALOG}/v2/catalog/product/search?title=${productTitle}`;
 
       try {
         const catalogueData = (await axios.get(catalogueUrl)).data;
@@ -71,7 +72,7 @@ export const initializeTools = (server: McpServer) => {
           content: [
             {
               type: "text",
-              text: `Unable to fetch expected date of delivery due to some error`,
+              text: `Unable to search catalogue due to some error`,
             },
           ],
         };
