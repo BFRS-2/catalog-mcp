@@ -6,11 +6,11 @@ import { API_DOMAINS } from "@/config";
 
 export const initializeTools = (server: McpServer) => {
   server.tool(
-    "catalogue_search",
-    `Get related products from catalogue based on product title
+    "catalog_search",
+    `Get related products from catalog based on product title
 
     Args:
-        title: String representing product title to search in the catalogue
+        title: String representing product title to search in the catalog
 
     Returns: Dictionary containing the following info for each product:
         id: String representing unique identifier of the product
@@ -36,16 +36,16 @@ export const initializeTools = (server: McpServer) => {
       title: zod.string(),
     },
     async ({ title: productTitle }, context) => {
-      const catalogueUrl = `${API_DOMAINS.SR_CATALOG}/v2/catalog/product/search?title=${productTitle}`;
+      const catalogUrl = `${API_DOMAINS.SR_CATALOG}/v2/catalog/product/search?title=${productTitle}`;
 
       try {
-        const catalogueData = (await axios.get(catalogueUrl)).data;
+        const catalogData = (await axios.get(catalogUrl)).data;
 
         return {
           content: [
             {
               type: "text",
-              text: JSON.stringify(catalogueData),
+              text: JSON.stringify(catalogData),
             },
           ],
         };
@@ -72,7 +72,7 @@ export const initializeTools = (server: McpServer) => {
           content: [
             {
               type: "text",
-              text: `Unable to search catalogue due to some error`,
+              text: `Unable to search catalog due to some error`,
             },
           ],
         };
