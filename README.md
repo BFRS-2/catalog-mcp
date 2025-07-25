@@ -4,7 +4,9 @@ This is a Model Context Protocol (MCP) server for Shiprocket.
 
 With this, you can:
 
-- Perform catalog search
+- List Product Catalog
+- Search Catelog by Brand names
+- Search Catelog by Category
 
 ### Here's an example of what you can do when it's connected to Claude.
 
@@ -12,7 +14,7 @@ With this, you can:
 
 ## 🛠️ Prerequisites
 
-- Node (version > 20.0.0 and < 23.0.0)
+- Node (version > 20.0.0)
 - Claude Desktop app (or Cursor)
 
 ## 🛠️ Installation
@@ -41,7 +43,7 @@ Add the following to your `claude_desktop_config.json` or `mcp.json`
 ```bash
 {
  "mcpServers": {
-   "Shiprocket": {
+   "ShiprocketCatalog": {
      "command": "npm",
       "args": [
         "--prefix",
@@ -78,4 +80,4 @@ Or restart Cursor.
 
 Clients (Claude or Cursor) can access the following tools to interact with Shiprocket:
 
-- `catalog_search` - To perform catalog search
+- `catalog_search` - To perform search on catalog
